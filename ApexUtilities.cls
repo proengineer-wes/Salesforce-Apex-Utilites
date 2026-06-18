@@ -9,10 +9,15 @@ global class ApexUtilities{
 *	@description = Method takes object name as an argument and return all (both custom and standard) fields
 */
     global static Set<String> getAllFields(String objectName){
-        Map<String, Schema.SObjectType> completeSchema = Schema.getGlobalDescribe(); 
-        Schema.SObjectType requiredObject = completeSchema.get(objectName);
-        return requiredObject.getDescribe().fields.getMap().keySet();
+    Map<String, Schema.SObjectType> completeSchema = Schema.getGlobalDescribe(); 
+    Schema.SObjectType requiredObject = completeSchema.get(objectName);
+
+    if(requiredObject == null){
+        return new Set<String>();
     }
+
+    return requiredObject.getDescribe().fields.getMap().keySet();
+}`'
     
     /*
 *	@methodName = getAllFields
