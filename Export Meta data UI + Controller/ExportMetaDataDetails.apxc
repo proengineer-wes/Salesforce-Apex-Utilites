@@ -8,9 +8,11 @@ public class ExportMetaDataDetails {
         System.debug('objectName '+objectName);
         if(objectName == null || objectName == '' || objectName.trim() == '') return;
         Map<String, Schema.SObjectType> completeSchema = Schema.getGlobalDescribe(); 
-        Schema.SObjectType requiredObject = completeSchema.get(objectName);
-        System.debug('requiredObject '+requiredObject);
-        for(Schema.SObjectField f : requiredObject.getDescribe().fields.getMap().values()){
+        chema.SObjectType requiredObject = completeSchema.get(objectName);
+System.debug('requiredObject '+requiredObject);
+if(requiredObject == null) return;
+
+for(Schema.SObjectField f : requiredObject.getDescribe().fields.getMap().values()){
             Schema.DescribeFieldResult fq = f.getDescribe();
             String name = fq.getName();
             String label = fq.getLabel();
